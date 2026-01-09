@@ -70,6 +70,7 @@ export class APIDemosActions {
         try { await el.click(); } catch (_) {}
         await browser.pause(200);
         await el.setValue(name);
+        try { await driver.hideKeyboard(); } catch (_) {}
     }
 
     async fillPasswordField(password: string) {
@@ -83,6 +84,7 @@ export class APIDemosActions {
         try { await el.click(); } catch (_) {}
         await browser.pause(200);
         await el.setValue(password);
+        try { await driver.hideKeyboard(); } catch (_) {}
     }
 
     async getNameFieldValue() {
