@@ -59,4 +59,25 @@ describe("ApiDemos", async () => {
         expect(await apiDemosAction.getQueryFieldValue()).toEqual(fillText);
         expect(await apiDemosAction.getAppDataFieldValue()).toEqual(fillText);
     });
+
+    it("@TC004 - Text Entry Dialog Scenario", async () => {
+        const nameValue = "John Doe";
+        const passwordValue = "SecurePass123";
+
+        await apiDemosAction.waitForAppBtn();
+        await apiDemosAction.clickAppBtn();
+        await apiDemosAction.clickAlertDialogsBtn();
+        await apiDemosAction.clickTextEntrydialogBtn();
+        
+        await apiDemosAction.fillNameField(nameValue);
+        await apiDemosAction.fillPasswordField(passwordValue);
+
+        expect(await apiDemosAction.getNameFieldValue()).toEqual(nameValue);
+        const masked = await apiDemosAction.getPasswordFieldMaskedValue();
+        // password inputs are masked (•). verify length and that field is password-type
+        expect(masked.length).toEqual(passwordValue.length);
+        expect(await apiDemosAction.isPasswordField()).toBeTruthy();
+
+        await apiDemosAction.clickOkButton();
+    });
 });
